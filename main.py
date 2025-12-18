@@ -69,7 +69,16 @@ class GameOfLife:
         вертикали и диагоналям, то есть во всех
         направлениях.
         """
-        pass
+        row, col = cell
+        neighbours = []
+        for di in (-1, 0, 1):
+            for dj in (-1, 0, 1):
+                if di == 0 and dj == 0:
+                    continue
+                ni, nj = row + di, col + dj
+                if 0 <= ni < self.cell_width and 0 <= nj < self.cell_width:
+                    neighbours.append(self.grid[ni][nj])
+            return neighbours
 
     def run(self):
         pygame.init()
