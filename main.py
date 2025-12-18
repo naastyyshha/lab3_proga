@@ -1,5 +1,7 @@
 import pygame
 from pygame.locals import *
+import random
+
 
 class GameOfLife:
     def __init__(self, width = 640, height = 480, cell_size = 10, speed = 10):
@@ -39,7 +41,11 @@ class GameOfLife:
         Если параметр randomize = True, то создается список, где
         каждая клетка может быть равновероятно живой или мертвой.
         """
-        pass
+        if randomize:
+            return [[random.randint(0, 1) for _ in range(0, self.cell_width)]
+            for _ in range(self.cell_height)]
+        return [[0 for _ in range(0, self.cell_width)]
+                for _ in range(self.cell_height)]
 
 
     def run(self):
