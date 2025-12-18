@@ -1,7 +1,7 @@
 import pygame
 from pygame.locals import *
 import random
-
+from pprint import pprint as pp
 
 class GameOfLife:
     def __init__(self, width = 640, height = 480, cell_size = 10, speed = 10):
@@ -47,6 +47,13 @@ class GameOfLife:
         return [[0 for _ in range(0, self.cell_width)]
                 for _ in range(self.cell_height)]
 
+    def draw_cell_list(self, rects):
+        """
+        Отображение списка клеток 'rects' с закрашиванием их в
+        соответствующе цвета
+        """
+        pass
+
 
     def run(self):
         pygame.init()
@@ -65,6 +72,6 @@ class GameOfLife:
 
 
 
-if __name__ == '__main__':
-    game = GameOfLife(320, 240, 20)
-    game.run()
+game = GameOfLife(320, 240, 40)
+clist = game.cell_list(randomize=True)
+pp(clist)
