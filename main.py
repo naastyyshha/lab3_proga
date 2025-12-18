@@ -1,7 +1,29 @@
 import pygame
 from pygame.locals import *
 import random
-from pprint import pprint as pp
+
+
+class Cell:
+
+    def __init__(self, row, col, state=False):
+        pass
+
+    def is_alive(self):
+        pass
+
+
+class CellList:
+
+    def __init__(self, nrows, ncols, randomize=False):
+        pass
+
+    def update(self):
+        pass
+
+    def get_neighbours(self, cell):
+        pass
+
+
 
 class GameOfLife:
     def __init__(self, width = 640, height = 480, cell_size = 10, speed = 10):
