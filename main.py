@@ -76,15 +76,35 @@ class GameOfLife:
                 if di == 0 and dj == 0:
                     continue
                 ni, nj = row + di, col + dj
-                if 0 <= ni < self.cell_width and 0 <= nj < self.cell_width:
+                if 0 <= ni < self.cell_height and 0 <= nj < self.cell_width:
                     neighbours.append(self.grid[ni][nj])
-            return neighbours
+        return neighbours
 
     def update_cell_list(self, cell_list):
         """
         Обновление состояния клеток
         """
-        pass
+        new_grid = [[0 for _ in range(self.cell_width)] for _ in range(self.cell_height)]
+
+        for i in range(self.cell_height):
+            for j in range(self.cell_width):
+                neighbours = self.get_neighbours((i, j))
+                live_neighbours = sum(neighbours)
+
+                if cell_list[i][j] == 1:
+                    # Живая клетка
+                    if live_neighbours in (2, 3):
+                        new_grid[i][j] = 1
+                    else:
+                        new_grid[i][j] = 0
+                else:
+                    # Мёртвая клетка
+                    if live_neighbours == 3:
+                        new_grid[i][j] = 1
+                    else:
+                        new_grid[i][j] = 0
+
+        return new_grid
 
     def run(self):
         pygame.init()
@@ -100,10 +120,15 @@ class GameOfLife:
             self.draw_cell_list(self.grid)
             self.draw_grid()
             pygame.display.flip()
+
+            # Обновляем состояние
+            self.grid = self.update_cell_list(self.grid)
+
             clock.tick(self.speed)
         pygame.quit()
 
 
 game = GameOfLife(320, 240, 20)
 game.run()
+
 
