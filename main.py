@@ -21,6 +21,9 @@ class GameOfLife:
         # Скорость протекания игры
         self.speed = speed
 
+        # Создаём начальное состояние поля
+        self.grid = self.cell_list(randomize=True)
+
 
     def draw_grid(self):
         # http://www.pygame.org/docs/ref/draw.html#pygame.draw.line
@@ -52,7 +55,11 @@ class GameOfLife:
         Отображение списка клеток 'rects' с закрашиванием их в
         соответствующе цвета
         """
-        pass
+        for i in range(len(rects)):
+            for j in range(len(rects[i])):
+                color = pygame.Color('green') if rects[i][j] == 1 else pygame.Color('white')
+                rect = (j * self.cell_size, i * self.cell_size, self.cell_size, self.cell_size)
+                pygame.draw.rect(self.screen, color, rect)
 
 
     def run(self):
@@ -65,13 +72,14 @@ class GameOfLife:
             for event in pygame.event.get():
                 if event.type == QUIT:
                     running = False
+
+            self.draw_cell_list(self.grid)
             self.draw_grid()
             pygame.display.flip()
             clock.tick(self.speed)
         pygame.quit()
 
 
+game = GameOfLife(320, 240, 20)
+game.run()
 
-game = GameOfLife(320, 240, 40)
-clist = game.cell_list(randomize=True)
-pp(clist)
