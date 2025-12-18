@@ -61,6 +61,15 @@ class GameOfLife:
                 rect = (j * self.cell_size, i * self.cell_size, self.cell_size, self.cell_size)
                 pygame.draw.rect(self.screen, color, rect)
 
+    def get_neighbours(self, cell):
+        """
+        Вернуть список соседних клеток для клетки cell.
+
+        Соседними считаются клетки по горизонтали,
+        вертикали и диагоналям, то есть во всех
+        направлениях.
+        """
+        pass
 
     def run(self):
         pygame.init()
