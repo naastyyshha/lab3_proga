@@ -80,6 +80,12 @@ class GameOfLife:
                     neighbours.append(self.grid[ni][nj])
             return neighbours
 
+    def update_cell_list(self, cell_list):
+        """
+        Обновление состояния клеток
+        """
+        pass
+
     def run(self):
         pygame.init()
         clock = pygame.time.Clock()
